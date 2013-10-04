@@ -7,5 +7,6 @@ $soundcloud = new Services_Soundcloud(
         '22ae5d25caad69e9fd59d87756146f99', 
         'http://dev.clicker.com/php-soundcloud'
         );
-echo $soundcloud->getAccessTokenUrl();
+$token = $soundcloud->accessToken();
+echo $token;
 ?>
