@@ -28,12 +28,13 @@ $sc_pass = "sofiia";
 // create client object and set access token
 $client = new Services_Soundcloud($sc_client_id, $sc_secret);
 //$client->setAccessToken('YOUR_ACCESS_TOKEN');
-
-if(isset($_GET['code'])){
+$user = $client->credentialsFlow($sc_user, $sc_pass);
+print_r($user);
+/*if(isset($_GET['code'])){
     $code = $_GET['code'];
     $access_token = $client->accessToken($code);
     echo $access_token;
-}
+}*/
 
 // upload audio file
 /*$track = json_decode($client->post('tracks', array(
