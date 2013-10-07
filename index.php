@@ -1,54 +1,36 @@
-<?php 
-
-/*require_once 'Services/Soundcloud.php';
-$sc_client_id = "801db1fa1ebf6447f220ebe09657a89e"; 
-$sc_secret = "3e9b2179343f27757c0dca3c000b30b2";
-$sc_user = "iramgutzglez";
-$sc_pass = "sofiia";
-// create client object and set access token
-$client = new Services_Soundcloud($sc_client_id, $sc_secret);
-// login
-$client->credentialsFlow($sc_user, $sc_pass);
-
-$track = json_decode($client->post('tracks', array(
-    'track[title]' => 'test',
-    //'track[asset_data]' => '/home/clickerdev/sites/dev.clicker360.com/public_html/php-soundcloud/test.mp3'
-    'track[asset_data]' => '/var/www/html/php-soundcloud/test.mp3'
-)));
-
-// print track link
-print $track->permalink_url;*/
-?>
 <?php
-require_once 'Services/Soundcloud.php';
-$sc_client_id = "801db1fa1ebf6447f220ebe09657a89e"; 
-$sc_secret = "3e9b2179343f27757c0dca3c000b30b2";
-$sc_user = "iramgutzglez";
-$sc_pass = "sofiia";
-// create client object and set access token
-$client = new Services_Soundcloud($sc_client_id, $sc_secret);
-//$client->setAccessToken('YOUR_ACCESS_TOKEN');
-$user = $client->credentialsFlow($sc_user, $sc_pass);
-$track = json_decode($client->post('tracks', array(
-    'track[title]' => 'test',
-    'track[asset_data]' => '@/home/clickerdev/sites/dev.clicker360.com/public_html/php-soundcloud/test.mp3'
-    //'track[asset_data]' => '/var/www/html/php-soundcloud/test.mp3'
-)));
-print_r($track);
-/*if(isset($_GET['code'])){
-    $code = $_GET['code'];
-    $access_token = $client->accessToken($code);
-    echo $access_token;
-}*/
+if(isset($_POST) && isset($_FILES)){
+    print_r($_POST);
+    echo "<pre>";
+    print_r($_FILES);
+    echo "</pre>";
+    
+    require_once 'Services/Soundcloud.php';
+    $sc_client_id = "801db1fa1ebf6447f220ebe09657a89e"; 
+    $sc_secret = "3e9b2179343f27757c0dca3c000b30b2";
+    $sc_user = "iramgutzglez";
+    $sc_pass = "sofiia";
 
-// upload audio file
-/*$track = json_decode($client->post('tracks', array(
-    'track[title]' => 'test',
-    'track[asset_data]' => '/home/clickerdev/sites/dev.clicker360.com/public_html/php-soundcloud/test.mp3',
-    'track[asset_data]' => '/var/www/html/php-soundcloud/test.mp3'
-)));
+    $client = new Services_Soundcloud($sc_client_id, $sc_secret);
+    $user = $client->credentialsFlow($sc_user, $sc_pass);
 
-// print track link
-print $track->permalink_url;*/
+    $track = json_decode(
+            $client->post(
+                        'tracks', 
+                        array(
+                            'track[title]' => $_FILES['file']['name'],
+                            'track[asset_data]' => $_FILES['file']['tmp_name']
+                        )
+                        )
+            );
+    echo "<pre>";
+    print_r($track);
+    echo "</pre>";
+}
 ?>
+<form method="post" enctype="multipart/form-data">
+    <input type="file" name="file" />
+    <input type="submit" value="Enviar" />
+</form>
+
 
