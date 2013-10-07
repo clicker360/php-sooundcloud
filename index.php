@@ -1,5 +1,5 @@
 <?php
-if(isset($_POST) && isset($_FILES)){
+if($_POST && $_FILES){
     print_r($_POST);
     echo "<pre>";
     print_r($_FILES);
