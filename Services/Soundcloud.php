@@ -617,7 +617,8 @@ class Services_Soundcloud
         $url = $this->_buildUrl($path);
         $options = array(CURLOPT_POST => true, CURLOPT_POSTFIELDS => $postData);
         $options += $curlOptions;
-
+        /*print_r($options);
+        exit();*/
         return $this->_request($url, $options);
     }
 
@@ -897,7 +898,7 @@ class Services_Soundcloud
         $ch = curl_init($url);
         $options = $this->_curlOptions;
         $options += $curlOptions;
-
+        
         if (array_key_exists(self::CURLOPT_OAUTH_TOKEN, $options)) {
             $includeAccessToken = $options[self::CURLOPT_OAUTH_TOKEN];
             unset($options[self::CURLOPT_OAUTH_TOKEN]);
@@ -938,6 +939,7 @@ class Services_Soundcloud
         if ($this->_validResponseCode($this->_lastHttpResponseCode)) {
             return $this->_lastHttpResponseBody;
         } else {
+            
             throw new Services_Soundcloud_Invalid_Http_Response_Code_Exception(
                 null,
                 0,
