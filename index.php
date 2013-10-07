@@ -1,6 +1,5 @@
 <?php
-if($_POST && $_FILES){
-    print_r($_POST);
+if( $_FILES){
     echo "<pre>";
     print_r($_FILES);
     echo "</pre>";
@@ -28,7 +27,7 @@ if($_POST && $_FILES){
     echo "</pre>";
 }
 ?>
-<form method="post" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data" action="" >
     <input type="file" name="file" />
     <input type="submit" value="Enviar" />
 </form>
