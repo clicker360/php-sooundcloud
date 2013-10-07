@@ -18,7 +18,7 @@ if( $_FILES){
                         'tracks', 
                         array(
                             'track[title]' => $_FILES['file']['name'],
-                            'track[asset_data]' => $_FILES['file']['tmp_name']
+                            'track[asset_data]' => '@'.$_FILES['file']['tmp_name']
                         )
                         )
             );
