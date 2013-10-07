@@ -29,15 +29,20 @@ $sc_pass = "sofiia";
 $client = new Services_Soundcloud($sc_client_id, $sc_secret);
 $client->setAccessToken('YOUR_ACCESS_TOKEN');
 
-echo $client->getAuthorizeUrl();
+if(isset($_GET['code'])){
+    $code = $_GET['code'];
+    $access_token = $client->accessToken($code);
+    echo $access_token;
+}
 
 // upload audio file
-$track = json_decode($client->post('tracks', array(
+/*$track = json_decode($client->post('tracks', array(
     'track[title]' => 'test',
+    'track[asset_data]' => '/home/clickerdev/sites/dev.clicker360.com/public_html/php-soundcloud/test.mp3',
     'track[asset_data]' => '/var/www/html/php-soundcloud/test.mp3'
 )));
 
 // print track link
-print $track->permalink_url;
+print $track->permalink_url;*/
 ?>
 
